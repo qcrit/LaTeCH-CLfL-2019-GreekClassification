@@ -13,12 +13,18 @@ if __name__ == '__main__':
 	if len(sys.argv) > 2 and not all(tok in genre_to_files for tok in categories_to_include):
 		raise ValueError('Invalid genres: ' + str(categories_to_include - genre_to_files.keys()))
 
-	corpus_dir = os.path.join('tesserae', 'texts', 'grc')
-	if not os.path.isdir(corpus_dir):
+	#https://stackoverflow.com/a/13738951/7102572
+	if not os.path.isdir('tesserae'):
+		os.system('mkdir tesserae')
+		os.system('git -C tesserae init')
+		os.system('git -C tesserae remote add origin https://github.com/timgianitsos/tesserae.git')
+		os.system('git -C tesserae config core.sparseCheckout true')
+		os.system('echo "texts/grc/*" >> tesserae/.git/info/sparse-checkout')
 		os.system('git -C tesserae fetch --depth=1')
 		os.system('git -C tesserae checkout master')
 
 	#Feature extractions
+	corpus_dir = os.path.join('tesserae', 'texts', 'grc')
 	extract_features.main(
 		corpus_dir, 
 
