@@ -3,6 +3,7 @@ Data mining a corpus of Ancient Greek texts to train machine learning classifier
 
 ## Setup (Instructions for Mac)
 Open Terminal app on Mac and copy these highlighted commands into the command line
+
 *Note do not include < > brackets when typing commands in terminal
 
 Install Homebrew:
@@ -22,6 +23,11 @@ echo "PIPENV_VENV_IN_PROJECT=true" >> ~/.bash_profile
 echo "export PIPENV_VENV_IN_PROJECT" >> ~/.bash_profile
 ```
 Close terminal, then repoen terminal
+
+Navigate inside Git:
+```bash
+cd Git
+```
 
 Clone this repository - click on green 'clone' button on right side of github screen and copy link:
 ```bash
