@@ -4,8 +4,6 @@ Data mining a corpus of Ancient Greek texts to train machine learning classifier
 ## Setup (Instructions for Mac)
 Open Terminal app on Mac and copy these highlighted commands into the command line
 
-*Note do not include < > brackets when typing commands in terminal
-
 Install Homebrew:
 ```bash
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -24,22 +22,17 @@ echo "export PIPENV_VENV_IN_PROJECT" >> ~/.bash_profile
 ```
 Close terminal, then repoen terminal
 
-Navigate inside Git:
-```bash
-cd Git
-```
-
-Clone this repository - click on green 'clone' button on right side of github screen and copy link:
+Clone this repository - click on green 'clone' button on right side of github webpage for this repo to copy the link:
 ```bash
 git clone <link you just copied>
 ```
 
-Navigate inside the repository:
+Navigate inside the project folder:
 ```bash
-cd <name of this Greek Classification repository on github>
+cd <the project folder you just cloned>
 ```
 
-Enter virtual environment: 
+Create/Enter virtual environment:
 ```bash
 pipenv shell
 ```
@@ -49,7 +42,7 @@ Install dependencies:
 pipenv install
 ```
 
-Run the demo (this does a simple feature extraction, and analyzes the results in one step):
+Run the demo (this does a feature extraction for a small sample of files, and analyzes the results in one step):
 ```bash
 python demo.py
 ```
