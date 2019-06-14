@@ -2,6 +2,9 @@
 Data mining a corpus of Ancient Greek texts to train machine learning classifiers that distinguish different genres.
 
 ## Setup (Instructions for Mac)
+Open Terminal app on Mac and copy these highlighted commands into the command line
+*Note do not include < > brackets when typing commands in terminal
+
 Install Homebrew:
 ```bash
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -27,7 +30,7 @@ git clone <link you just copied>
 
 Navigate inside the repository:
 ```bash
-cd <name of repository>
+cd <name of this Greek Classification repository on github>
 ```
 
 Enter virtual environment: 
