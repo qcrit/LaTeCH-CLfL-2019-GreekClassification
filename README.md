@@ -18,16 +18,16 @@ echo "#When pipenv makes a virtual environment, it will create it in the same di
 echo "PIPENV_VENV_IN_PROJECT=true" >> ~/.bash_profile
 echo "export PIPENV_VENV_IN_PROJECT" >> ~/.bash_profile
 ```
-Close terminal, then repoen
+Close terminal, then repoen terminal
 
-Clone this repository: 
+Clone this repository - click on green 'clone' button on right side of github screen and copy link:
 ```bash
-git clone <this repo>
+git clone <link you just copied>
 ```
 
-Navigate inside the repository: 
+Navigate inside the repository:
 ```bash
-cd <this directory>
+cd <name of repository>
 ```
 
 Enter virtual environment: 
