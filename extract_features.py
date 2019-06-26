@@ -64,7 +64,7 @@ def _extract_features(corpus_dir, file_extension, excluded_paths, features, outp
 
 		if output_file is not None:
 			print_progress_bar(file_no, len(file_names), prefix='Progress', 
-				suffix='(%d of %d files)' % (file_no, len(file_names)), length=43)
+				suffix='(%d of %d files)' % (file_no, len(file_names)))
 			file_no += 1
 
 	clear_cache(tokenize_types, debug_output)

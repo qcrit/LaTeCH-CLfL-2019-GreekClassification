@@ -3,7 +3,7 @@
 _prev_str_length = None
 
 # Print iterations progress
-def print_progress_bar(iteration, total, prefix='', suffix='', decimals=1, length=50, fill='█'):
+def print_progress_bar(iteration, total, prefix='', suffix='', decimals=1, length=18, fill='█'):
 	"""
 	Call in a loop to create terminal progress bar
 	@params:
@@ -44,7 +44,7 @@ if __name__ == '__main__':
 		# Do stuff...
 		sleep(0.1)
 		# Update Progress Bar
-		print_progress_bar(i, l, prefix='Progress:', suffix='Complete', length=50)
+		print_progress_bar(i, l, prefix='Progress:', suffix='Complete')
 
 	# Sample Output
 	# Progress: |█████████████████████████████████████████████-----| 90.0% Complete
