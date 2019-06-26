@@ -1,8 +1,16 @@
 # Greek Prose Classifier
-Data mining a corpus of Ancient Greek texts to train machine learning classifiers that distinguish different genres.
+We are data mining a corpus of Ancient Greek texts to train machine learning classifiers that distinguish between different genres.
 
 ## Setup (Instructions for Mac)
-Open Terminal app on Mac and copy these highlighted commands into the command line
+Install Python 3.6 if you do not currently have it. https://www.python.org/downloads/release/python-368/
+
+Open the Terminal app
+
+Ensure that you have the Xcode command-line tools installed on your Mac by running the `git` command in terminal:
+```
+git
+```
+If the command outputs information about how to use `git`, then you already have it installed. If a dialog box appears that prompts you to install, then click `Install`.
 
 Install Homebrew:
 ```bash
@@ -14,7 +22,7 @@ Install pipenv:
 brew install pipenv
 ```
 
-(Optional) Set environment variable by executing the following lines (which will modify `~/.bash_profile`)
+(Optional) Set environment variable by executing the following lines (which will modify `~/.bash_profile`). This should only ever need to be done once.
 ```bash
 echo "#When pipenv makes a virtual environment, it will create it in the same directory as the project instead of ~/.local/share/virtualenv/" >> ~/.bash_profile
 echo "PIPENV_VENV_IN_PROJECT=true" >> ~/.bash_profile
