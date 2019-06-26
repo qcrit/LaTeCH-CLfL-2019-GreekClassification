@@ -2,17 +2,26 @@
 We are data mining a corpus of Ancient Greek texts to train machine learning classifiers that distinguish between different genres.
 
 ## Setup (Instructions for Mac)
-Install Python 3.6 if you do not currently have it. https://www.python.org/downloads/release/python-368/
 
 Open the Terminal app
 
-Ensure that you have the Xcode command-line tools installed on your Mac by running the `git` command in terminal:
+Check if you have Python 3.6 installed:
+```bash
+which python3.6
 ```
+If it is installed, this command should have output a path. For example: `/Library/Frameworks/Python.framework/Versions/3.6/bin/python3.6`. If nothing was output, download Python 3.6 here: https://www.python.org/downloads/release/python-368/
+
+Ensure that you have the Xcode command-line tools installed on your Mac by running the `git` command in terminal:
+```bash
 git
 ```
 If the command outputs information about how to use `git`, then you already have it installed. If a dialog box appears that prompts you to install, then click `Install`.
 
-Install Homebrew:
+Check that you have `brew` installed:
+```bash
+which brew
+```
+If it is installed, this command should have output the following path: `/usr/local/bin/brew`. If nothing was output, install brew with the following command: 
 ```bash
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
