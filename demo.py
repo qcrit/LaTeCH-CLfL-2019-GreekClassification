@@ -109,14 +109,15 @@ and the particular classification (prose or verse) in the second column for ever
 '''
 import analyze_models
 from model_analyzer import model_analyzer
-from sklearn import ensemble, neural_network, svm
+from sklearn import ensemble
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
 
 @model_analyzer()
-def random_forest_analyzer(data, target, file_names, feature_names, labels_key):
-	print('-' * 40 + '\nRandom Forest Classifier\n')
+def feature_rankings(data, target, file_names, feature_names, labels_key):
+	print('-' * 40 + '\nRandom Forest Classifier feature rankings\n')
 	features_train, features_test, labels_train, labels_test = train_test_split(data, target, test_size=0.5, random_state=0)
-	clf = ensemble.RandomForestClassifier(random_state=0)
+	clf = ensemble.RandomForestClassifier(random_state=0, n_estimators=10)
 	clf.fit(features_train, labels_train)
 	results = clf.predict(features_test)
 
@@ -126,65 +127,75 @@ def random_forest_analyzer(data, target, file_names, feature_names, labels_key):
 		print('\t%f: %s' % (t[1], t[0]))
 
 @model_analyzer()
-def neural_net_analyzer(data, target, file_names, feature_names, labels_key):
-	print('-' * 40 + '\nMultilayer Perceptron\n')
+def classifier_accuracy(data, target, file_names, feature_names, labels_key):
+	print('-' * 40 + '\nRandom Forest Classifier classifier accuracy\n')
 	features_train, features_test, labels_train, labels_test = train_test_split(data, target, test_size=0.5, random_state=0)
-	clf = neural_network.MLPClassifier(activation='relu', solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(12,), random_state=0)
+	clf = ensemble.RandomForestClassifier(random_state=0, n_estimators=10)
 	clf.fit(features_train, labels_train)
 	results = clf.predict(features_test)
 
-	num_correct = reduce(lambda x, y: x + (1 if results[y] == target[y] else 0), range(len(results)), 0)
 	print('Stats:')
-	print('\tNumber correct: ' + str(num_correct) + ' / ' + str(len(target)))
-	print('\tPercentage correct: ' + str(num_correct / len(target)) + '%')
+	print('\tNumber correct: ' + str(accuracy_score(labels_test, results, normalize=False)) + ' / ' + str(len(results)))
+	print('\tPercentage correct: ' + str(accuracy_score(labels_test, results) * 100) + '%')
 
 @model_analyzer()
-def support_vector_machine_analyzer(data, target, file_names, feature_names, labels_key):
-	print('-' * 40 + '\nSupport Vector Machine\n')
-	features_train, features_test, labels_train, labels_test = train_test_split(data, target, test_size=0.5, random_state=1)
-	clf = svm.SVC(gamma=0.00001, kernel='rbf', random_state=0)
+def misclassified_texts(data, target, file_names, feature_names, labels_key):
+	print('-' * 40 + '\nRandom Forest Classifier misclassified texts\n')
+	features_train, features_test, labels_train, labels_test, idx_train, idx_test = train_test_split(
+		data, target, range(len(target)), test_size=0.5, random_state=0
+	)
+	print('Train texts:\n\t' + '\n\t'.join(file_names[i] for i in idx_train) + '\n')
+	print('Test texts:\n\t' + '\n\t'.join(file_names[i] for i in idx_test) + '\n')
+	clf = ensemble.RandomForestClassifier(random_state=0, n_estimators=10)
 	clf.fit(features_train, labels_train)
 	results = clf.predict(features_test)
 
 	print('Misclassifications:')
 	found_misclassification = False
 	for j in range(len(results)):
-		if results[j] != target[j]:
-			print('\t' + file_names[j])
+		if results[j] != labels_test[j]:
+			print('\t' + file_names[idx_test[j]])
 			found_misclassification = True
 	print('No misclassifications!' if not found_misclassification else '', end='')
 
 analyze_models.main('demo_files/output.pickle', 'demo_files/classifications.csv')
 '''
 ----------------------------------------
-Random Forest Classifier
+Random Forest Classifier feature rankings
 
 Feature importances:
-	0.200000: num_conjunctions
-	0.200000: num_interrogatives
-	0.100000: mean_sentence_length
+	0.400000: num_conjunctions
+	0.400000: num_interrogatives
+	0.200000: mean_sentence_length
 
 
-Elapsed time: 0.011877743992954493
+Elapsed time: 0.0098 seconds
 
 ----------------------------------------
-Multilayer Perceptron
+Random Forest Classifier classifier accuracy
 
 Stats:
-	Number correct: 1 / 4
-	Percentage correct: 0.25%
+	Number correct: 1 / 2
+	Percentage correct: 50.0%
 
 
-Elapsed time: 0.005417105043306947
+Elapsed time: 0.0175 seconds
 
 ----------------------------------------
-Support Vector Machine
+Random Forest Classifier misclassified texts
+
+Train texts:
+	demo_files/aristotle.metaphysics.tess
+	demo_files/aristophanes.ecclesiazusae.tess
+
+Test texts:
+	demo_files/euripides.heracles.tess
+	demo_files/plato.respublica.tess
 
 Misclassifications:
-	demo_files/aristophanes.ecclesiazusae.tess
-	demo_files/aristotle.metaphysics.tess
+	demo_files/plato.respublica.tess
 
 
-Elapsed time: 0.0010444470099173486
-
+Elapsed time: 0.0096 seconds
+# 
 '''
