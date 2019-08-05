@@ -1,6 +1,7 @@
 import greek_features #seemingly unused here, but this makes the environment recognize features
 import extract_features
 import os
+import subprocess
 import sys
 from corpus_categories import composite_files, genre_to_files
 from functools import reduce
@@ -14,11 +15,21 @@ if __name__ == '__main__':
 		raise ValueError('Invalid genres: ' + str(categories_to_include - genre_to_files.keys()))
 
 	#https://stackoverflow.com/a/13738951/7102572
-	if not os.path.isdir('grc'):
-		os.system('svn export https://github.com/timgianitsos/tesserae/trunk/texts/grc')
+	corpus_dir = 'grc'
+	if not os.path.isdir(corpus_dir):
+		try:
+			cmd = 'svn'
+			proc = subprocess.run(
+				[cmd, 'export', 'https://github.com/timgianitsos/tesserae/trunk/texts/grc']
+			)
+			proc.check_returncode()
+		except OSError as e:
+			print(f'Your system may not have "{cmd}" installed')
+			raise e
+		except subprocess.CalledProcessError as e:
+			raise e
 
 	#Feature extractions
-	corpus_dir = os.path.join('grc')
 	extract_features.main(
 		corpus_dir, 
 
